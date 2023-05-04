@@ -6,3 +6,11 @@ body,
   width: 100vw;
   height: 100vh;
 }
+
+// electron关于无边框窗口无法拖拽移动以及点击事件失效的问题
+html {
+  -webkit-app-region: drag;
+}
+textarea {
+  -webkit-app-region: no-drag;
+}
