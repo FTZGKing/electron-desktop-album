@@ -18,9 +18,20 @@
       <div class="avatar" title="用户详情" @click="jumperRouter('/user')">
         <el-avatar :size="48" :src="avatar" />
       </div>
-      <el-icon size="24" title="功能栏">
-        <Operation />
-      </el-icon>
+
+      <el-dropdown trigger="click" @command="handleCommand">
+        <el-icon size="22" title="功能栏">
+          <Operation />
+        </el-icon>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item command="logout">
+              <el-icon color="red" size="20"><WarningFilled /></el-icon>
+              <b>退出登录</b>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
 
       <div>|</div>
 
@@ -48,6 +59,7 @@ import {
   Operation,
   ArrowLeft,
   ArrowRight,
+  WarningFilled,
 } from '@element-plus/icons-vue'
 import { getMyselfInfoApi } from '@/request/api'
 import { useLoginStore } from '@/store/store'
@@ -101,6 +113,20 @@ const closeWindow = () => (window as any).controlWindow.closeWindow()
 const jumperRouter = (path: string) => router.push(path)
 // 路由的前进后退
 const historyRouter = (num: number) => router.go(num)
+
+// 下拉菜单项点击事件
+const handleCommand = (command: string | number) => {
+  const obj: { [key: string | number]: Function } = {
+    logout: () => logout(),
+  }
+  const func: Function = obj[command]
+  func()
+}
+// 退出登录
+const logout = () => {
+  window.localStorage.removeItem('token')
+  router.push('/login')
+}
 </script>
 
 <style lang="less" scoped>
@@ -126,19 +152,18 @@ const historyRouter = (num: number) => router.go(num)
   > .partRight {
     display: flex;
     align-items: center;
+    -webkit-app-region: no-drag;
 
     > * {
       margin: 0 8px;
     }
     > .avatar {
-      -webkit-app-region: no-drag;
       display: flex;
       align-items: center;
       cursor: pointer;
     }
 
-    > .el-icon {
-      -webkit-app-region: no-drag;
+    .el-icon {
       cursor: pointer;
       font-size: 25px;
       color: rgb(105, 105, 105);
