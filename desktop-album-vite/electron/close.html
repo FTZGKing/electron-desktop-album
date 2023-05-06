@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>是否退出程序</title>
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            -webkit-app-region: drag;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #ecfdec;
+        }
+
+        div {
+            width: 100%;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .btns {
+            justify-content: space-around;
+        }
+
+        button {
+            -webkit-app-region: no-drag;
+            padding: 8px 18px;
+            border-radius: 6px;
+            border: none;
+            background-color: rgb(209, 229, 247);
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: rgb(154, 201, 243);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">确定退出相册程序?</div>
+        <div class="btns">
+            <button id="cancel">取消</button>
+            <button id="confirm">确定</button>
+        </div>
+    </div>
+
+    <script>
+        const cancelBtn = document.getElementById('cancel')
+        const confirmBtn = document.getElementById('confirm')
+
+        cancelBtn.addEventListener('click', () => {
+            window.controlWindow.cancelClose()
+        })
+        confirmBtn.addEventListener('click', () => {
+            window.controlWindow.confirmClose()
+        })
+
+    </script>
+</body>
+
+</html>

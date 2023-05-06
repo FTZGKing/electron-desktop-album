@@ -22,3 +22,10 @@ export const useCounterStore = defineStore('counter', () => {
 
   return { count, increment }
 })
+
+// 登录状态
+export const useLoginStore = defineStore('login', () => {
+  const status = ref<Boolean>(false)
+  const setStatus = (s: Boolean) => (status.value = s)
+  return { status, setStatus }
+})

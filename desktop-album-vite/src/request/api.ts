@@ -2,34 +2,55 @@ import { instance as request } from './request'
 
 //
 // 注册
-export const registerApi = (data: registerItf): PromiseRes => {
-  return request.post(`/api/register`, data)
+export const registerApi = (
+  account: string,
+  password: string,
+  secret_key: string
+): PromiseRes => {
+  return request.post(`/api/register`, {
+    account,
+    password,
+    secret_key,
+  })
 }
 
 //
 // 验证账号
-export const verifyApi = (data: verifyItf): PromiseRes => {
-  return request.post(`/api/verify`, data)
+export const verifyApi = (account: string, secret_key: string): PromiseRes => {
+  return request.post(`/api/verify`, {
+    account,
+    secret_key,
+  })
 }
 
 //
 // 账号密码登录
-export const loginApi = (data: loginItf): PromiseRes => {
-  return request.post(`/api/login`, data)
+export const loginApi = (
+  account: string,
+  password: string,
+  verify: string
+): PromiseRes => {
+  return request.post(`/api/login`, {
+    account,
+    password,
+    verify,
+  })
 }
 
 //
 //
 // 以下为权限接口
+//
+//
 
 //
-// 账号密码登录
-export const getMyselfInfoApi = (): PromiseRes => {
+// 获取自身的一些信息
+export const getMyselfInfoApi = (): PromiseRes<getMyselfInfoItf> => {
   return request.get(`/user/getMyselfInfo`)
 }
 
 //
-// 账号密码登录
+// 修改昵称
 export const modifyNicknameApi = (nickname: string): PromiseRes => {
   return request.put(`/user/modifyNickname`, {
     nickname,

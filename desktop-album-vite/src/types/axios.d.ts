@@ -1,22 +1,13 @@
 interface dataReust<T> {
-  data: T
-  code: number
+  status: number
+  message: string
+  data?: T
+  verify?: string
+  token?: string
 }
 type PromiseRes<T = {}> = Promise<dataReust<T>>
 
-interface registerItf {
-  account: string
-  password: string
-  secret_key: string
-}
-
-interface verifyItf {
-  account: string
-  secret_key: string
-}
-
-interface loginItf {
-  account: string
-  password: string
-  verify: string
+interface getMyselfInfoItf {
+  nickname: string
+  avatar: string
 }

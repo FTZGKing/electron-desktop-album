@@ -9,7 +9,7 @@ const instance = axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use(
   function (config) {
-    let token = window.sessionStorage.getItem('token')
+    let token = window.localStorage.getItem('token')
     if (token) config.headers.Authorization = token
 
     return config
